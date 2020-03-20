@@ -3,7 +3,14 @@
 
 namespace gio
 {
-Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w) {}
+Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w)
+{
+    if (!font_.loadFromFile("assets/kremlin.ttf"))
+    {
+        std::cout << "error loading font\n";
+    }
+}
+
 std::string Game::GetName() const { return name_; }
 
 void Game::OnSetup()
@@ -24,6 +31,15 @@ void Game::OnFrame()
     auto const currentTime = clock_.getElapsedTime().asSeconds();
     auto const timestep    = currentTime - lastFrameTime_;
     lastFrameTime_         = currentTime;
+
+    sf::Text fps;
+    fps.setFont(font_);  // font is a sf::Font
+    fps.setString(std::to_string(static_cast<int>(timestep * 1000)));
+    fps.setCharacterSize(24);  // in pixels, not points!
+    fps.setFillColor(sf::Color::Red);
+    fps.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    fps.setPosition({500.f, 0.f});
+    window_.draw(fps);
 
     position += timestep * (velocity + timestep * acceleration / 2);
     velocity += timestep * acceleration;

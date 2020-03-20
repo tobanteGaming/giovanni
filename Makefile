@@ -7,11 +7,11 @@ BUILD_DIR = $(BUILD_DIR_BASE)_$(CONFIG)
 
 .PHONY: config
 config:
-	cmake -S. -GNinja -B$(BUILD_DIR)
+	cmake -S. -GNinja -B$(BUILD_DIR) -DCMAKE_BUILD_TYPE=$(CONFIG)
 
 .PHONY: build
 build:
-	cmake --build $(BUILD_DIR)
+	cmake --build $(BUILD_DIR) --config $(CONFIG)
 
 .PHONY: test
 test:

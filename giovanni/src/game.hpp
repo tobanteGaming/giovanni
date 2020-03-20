@@ -20,6 +20,8 @@ public:
 
 private:
     std::string name_;
+    sf::Font font_;
+
     sf::RenderWindow& window_;
     sf::RectangleShape floor_ {{100.f, 100.f}};
     gio::Player player_ {};

@@ -6,3 +6,5 @@
 build_*
 build-*
 build
+
+.DS_Store
