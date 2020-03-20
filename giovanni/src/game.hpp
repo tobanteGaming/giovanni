@@ -18,6 +18,6 @@ public:
 private:
     std::string name_;
     sf::RenderWindow& window_;
-    sf::RectangleShape shape_ {{50.f, 100.f}};
+    sf::RectangleShape shape_ {{100.f, 100.f}};
 };
 }  // namespace gio
