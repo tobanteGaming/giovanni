@@ -1,6 +1,9 @@
 #pragma once
 
+#include "player.hpp"
+
 #include "SFML/Graphics.hpp"
+
 #include <string>
 
 namespace gio
@@ -18,6 +21,7 @@ public:
 private:
     std::string name_;
     sf::RenderWindow& window_;
-    sf::RectangleShape shape_ {{100.f, 100.f}};
+    sf::RectangleShape floor_ {{100.f, 100.f}};
+    gio::Player player_ {};
 };
 }  // namespace gio

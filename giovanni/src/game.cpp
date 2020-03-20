@@ -5,19 +5,20 @@ namespace gio
 {
 Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w) {}
 std::string Game::GetName() const { return name_; }
+
 void Game::OnSetup()
 {
     auto const width  = window_.getSize().x;
     auto const height = window_.getSize().y;
 
-    auto const shapeWidth  = shape_.getSize().x;
-    auto const shapeHeight = shape_.getSize().y;
+    auto const shapeWidth  = floor_.getSize().x;
+    auto const shapeHeight = floor_.getSize().y;
 
-    shape_.setPosition({0.f, height * 0.95f});
-    shape_.setSize({static_cast<float>(width), height * 0.05f});
-    shape_.setFillColor({129, 59, 10});
+    floor_.setPosition({0.f, height * 0.95f});
+    floor_.setSize({static_cast<float>(width), height * 0.05f});
+    floor_.setFillColor({129, 59, 10});
 }
-void Game::OnFrame() { window_.draw(shape_); }
+void Game::OnFrame() { window_.draw(floor_); }
 void Game::OnEvent(sf::Event e)
 {
     if (e.type == sf::Event::Closed) window_.close();

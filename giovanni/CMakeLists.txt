@@ -4,6 +4,8 @@ project(giovanni)
 set(giovanni_library_sources
     src/game.hpp
     src/game.cpp
+    src/player.hpp
+    src/player.cpp
 )
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${giovanni_library_sources})
 add_library(${PROJECT_NAME} ${giovanni_library_sources})
