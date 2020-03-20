@@ -18,7 +18,13 @@ void Game::OnSetup()
     floor_.setSize({static_cast<float>(width), height * 0.05f});
     floor_.setFillColor({129, 59, 10});
 }
-void Game::OnFrame() { window_.draw(floor_); }
+
+void Game::OnFrame()
+{
+    window_.draw(floor_);
+    player_.OnDraw(window_);
+}
+
 void Game::OnEvent(sf::Event e)
 {
     if (e.type == sf::Event::Closed) window_.close();

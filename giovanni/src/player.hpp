@@ -10,6 +10,9 @@ public:
     Player();
     void OnDraw(sf::RenderWindow& w);
     void OnEvent(sf::Event e);
+
+private:
+    sf::RectangleShape body_ {};
 };
 
 }  // namespace gio
