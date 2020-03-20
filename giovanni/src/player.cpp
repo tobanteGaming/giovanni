@@ -11,4 +11,7 @@ Player::Player()
 void Player::OnDraw(sf::RenderWindow& w) { w.draw(body_); }
 void Player::OnEvent(sf::Event e) {}
 
+void Player::SetPosition(sf::Vector2f pos) { body_.setPosition(pos); }
+sf::Vector2f Player::GetPosition() const { return body_.getPosition(); }
+
 }  // namespace gio

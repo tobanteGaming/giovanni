@@ -23,5 +23,12 @@ private:
     sf::RenderWindow& window_;
     sf::RectangleShape floor_ {{100.f, 100.f}};
     gio::Player player_ {};
+    sf::Clock clock_ {};
+    float lastFrameTime_ {};
+
+    float acceleration {10.f};
+    float position {};
+    float mass {1.f};
+    float velocity {};
 };
 }  // namespace gio

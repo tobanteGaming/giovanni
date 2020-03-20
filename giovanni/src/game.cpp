@@ -21,8 +21,18 @@ void Game::OnSetup()
 
 void Game::OnFrame()
 {
+    auto const currentTime = clock_.getElapsedTime().asSeconds();
+    auto const timestep    = currentTime - lastFrameTime_;
+    lastFrameTime_         = currentTime;
+
+    position += timestep * (velocity + timestep * acceleration / 2);
+    velocity += timestep * acceleration;
+
+    player_.SetPosition({player_.GetPosition().x, position});
+
     window_.draw(floor_);
     player_.OnDraw(window_);
+    // std::cout << player_.GetPosition().x << " " << player_.GetPosition().y << std::endl;
 }
 
 void Game::OnEvent(sf::Event e)
