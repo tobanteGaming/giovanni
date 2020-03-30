@@ -9,6 +9,8 @@ Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w)
     {
         std::cout << "error loading font\n";
     }
+
+    window_.setFramerateLimit(60);
 }
 
 std::string Game::GetName() const { return name_; }
