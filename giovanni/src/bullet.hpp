@@ -2,6 +2,8 @@
 
 #include "SFML/Graphics.hpp"
 
+#include <cstdio>
+
 namespace gio
 {
 class Bullet

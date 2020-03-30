@@ -15,6 +15,7 @@ public:
 
     void SetPosition(sf::Vector2f);
     sf::Vector2f GetPosition() const;
+    std::vector<Bullet>& GetBullets() { return activeBullets; }
 
 private:
     sf::RectangleShape body_ {};

@@ -28,6 +28,16 @@ void Physics::OnUpdate(float timestep)
     }
 
     player_.SetPosition({player_.GetPosition().x, position});
+
+    auto& bullets = player_.GetBullets();
+
+    auto const index = std::find_if(bullets.begin(), bullets.end(),
+                                    [f = floor_](Bullet const& b) { return !(b.GetPosition().y >= f.getSize().y); });
+
+    if (index != bullets.end())
+    {
+        bullets.erase(index);
+    }
 }
 void Physics::OnEvent(sf::Event e) {}
 
