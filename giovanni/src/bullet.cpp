@@ -1,4 +1,5 @@
 #include "bullet.hpp"
+#include <cstdio>
 
 namespace gio
 {
@@ -12,9 +13,10 @@ void Bullet::OnDraw(sf::RenderWindow& w, float timestep)
     auto xPos = body_.getPosition().x;
     auto yPos = body_.getPosition().y;
 
-    float y = 1.1f * y;
+    position += timestep * (velocity + timestep * acceleration / 2);
+    velocity += timestep * acceleration;
 
-    body_.setPosition({xPos += 1000.f * timestep, yPos += 1});
+    body_.setPosition({xPos += 1000.f * timestep, yPos + position});
 
     w.draw(body_);
 }

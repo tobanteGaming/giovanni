@@ -18,7 +18,7 @@ public:
     sf::RectangleShape const& GetFloor() const { return floor_; }
 
 private:
-    float acceleration {10.f};
+    float acceleration {100.f};
     float position {};
     float mass {1.f};
     float velocity {};

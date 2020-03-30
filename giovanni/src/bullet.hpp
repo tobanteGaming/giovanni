@@ -16,6 +16,11 @@ public:
 
 private:
     sf::RectangleShape body_ {};
+
+    float acceleration {50.f};
+    float position {};
+    float mass {2.f};
+    float velocity {};
 };
 
 }  // namespace gio
