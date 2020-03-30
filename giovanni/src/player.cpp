@@ -11,17 +11,13 @@ Player::Player()
     body_.setSize({50.f, 100.f});
     body_.setFillColor({255, 0, 0});
 }
-void Player::OnDraw(sf::RenderWindow& w)
+void Player::OnDraw(sf::RenderWindow& w, float timestep)
 {
 
     for (auto& b : activeBullets)
     {
-        b.OnDraw(w);
+        b.OnDraw(w, timestep);
     }
-    //      auto it = std::remove(c.begin(), c.end(), value);
-    // auto r = std::distance(it, c.end());
-    // c.erase(it, c.end());
-    // return r;
 
     auto const index = std::find_if(activeBullets.begin(), activeBullets.end(),
                                     [&w](Bullet const& b) { return b.GetPosition().x > w.getSize().x; });
@@ -35,7 +31,6 @@ void Player::OnDraw(sf::RenderWindow& w)
 }
 void Player::OnEvent(sf::Event e)
 {
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
         auto bullet = Bullet();

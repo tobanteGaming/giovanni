@@ -41,13 +41,20 @@ void Game::OnFrame()
     fps.setPosition({500.f, 0.f});
     window_.draw(fps);
 
-    position += timestep * (velocity + timestep * acceleration / 2);
-    velocity += timestep * acceleration;
+    if (player_.GetPosition().y + 100 < floor_.getPosition().y)
+    {
+        position += timestep * (velocity + timestep * acceleration / 2);
+        velocity += timestep * acceleration;
+    }
+    else
+    {
+        position = floor_.getPosition().y - 100;
+    }
 
     player_.SetPosition({player_.GetPosition().x, position});
 
     window_.draw(floor_);
-    player_.OnDraw(window_);
+    player_.OnDraw(window_, timestep);
     // std::cout << player_.GetPosition().x << " " << player_.GetPosition().y << std::endl;
 }
 

@@ -8,7 +8,7 @@ class Bullet
 {
 public:
     Bullet();
-    void OnDraw(sf::RenderWindow& w);
+    void OnDraw(sf::RenderWindow& w, float timestep);
     void OnEvent(sf::Event e);
 
     void SetPosition(sf::Vector2f);
