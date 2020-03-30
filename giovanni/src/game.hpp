@@ -1,5 +1,6 @@
 #pragma once
 
+#include "bullet.hpp"
 #include "player.hpp"
 
 #include "SFML/Graphics.hpp"
@@ -25,6 +26,7 @@ private:
     sf::RenderWindow& window_;
     sf::RectangleShape floor_ {{100.f, 100.f}};
     gio::Player player_ {};
+    gio::Bullet bullet_ {};
     sf::Clock clock_ {};
     float lastFrameTime_ {};
 

@@ -1,15 +1,13 @@
 #pragma once
 
-#include "bullet.hpp"
-
 #include "SFML/Graphics.hpp"
 
 namespace gio
 {
-class Player
+class Bullet
 {
 public:
-    Player();
+    Bullet();
     void OnDraw(sf::RenderWindow& w);
     void OnEvent(sf::Event e);
 
@@ -18,7 +16,6 @@ public:
 
 private:
     sf::RectangleShape body_ {};
-    std::vector<Bullet> activeBullets {};
 };
 
 }  // namespace gio

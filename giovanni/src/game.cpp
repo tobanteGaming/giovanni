@@ -58,5 +58,6 @@ void Game::OnEvent(sf::Event e)
     {
         std::cout << "resized: " << e.size.width << " " << e.size.height << '\n';
     }
+    player_.OnEvent(e);
 }
 }  // namespace gio
