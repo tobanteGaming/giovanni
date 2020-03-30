@@ -15,24 +15,15 @@ Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w)
 
 std::string Game::GetName() const { return name_; }
 
-void Game::OnSetup()
-{
-    auto const width  = window_.getSize().x;
-    auto const height = window_.getSize().y;
-
-    auto const shapeWidth  = floor_.getSize().x;
-    auto const shapeHeight = floor_.getSize().y;
-
-    floor_.setPosition({0.f, height * 0.95f});
-    floor_.setSize({static_cast<float>(width), height * 0.05f});
-    floor_.setFillColor({129, 59, 10});
-}
+void Game::OnSetup() { physics_.OnSetup(window_.getSize().x, window_.getSize().y); }
 
 void Game::OnFrame()
 {
     auto const currentTime = clock_.getElapsedTime().asSeconds();
     auto const timestep    = currentTime - lastFrameTime_;
     lastFrameTime_         = currentTime;
+
+    physics_.OnUpdate(timestep);
 
     sf::Text fps;
     fps.setFont(font_);  // font is a sf::Font
@@ -43,21 +34,8 @@ void Game::OnFrame()
     fps.setPosition({500.f, 0.f});
     window_.draw(fps);
 
-    if (player_.GetPosition().y + 100 < floor_.getPosition().y)
-    {
-        position += timestep * (velocity + timestep * acceleration / 2);
-        velocity += timestep * acceleration;
-    }
-    else
-    {
-        position = floor_.getPosition().y - 100;
-    }
-
-    player_.SetPosition({player_.GetPosition().x, position});
-
-    window_.draw(floor_);
+    window_.draw(physics_.GetFloor());
     player_.OnDraw(window_, timestep);
-    // std::cout << player_.GetPosition().x << " " << player_.GetPosition().y << std::endl;
 }
 
 void Game::OnEvent(sf::Event e)

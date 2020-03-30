@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bullet.hpp"
+#include "physics.hpp"
 #include "player.hpp"
 
 #include "SFML/Graphics.hpp"
@@ -24,15 +25,10 @@ private:
     sf::Font font_;
 
     sf::RenderWindow& window_;
-    sf::RectangleShape floor_ {{100.f, 100.f}};
+
     gio::Player player_ {};
-    gio::Bullet bullet_ {};
+    gio::Physics physics_ {player_};
     sf::Clock clock_ {};
     float lastFrameTime_ {};
-
-    float acceleration {10.f};
-    float position {};
-    float mass {1.f};
-    float velocity {};
 };
 }  // namespace gio

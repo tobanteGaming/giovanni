@@ -39,6 +39,10 @@ void Player::OnEvent(sf::Event e)
 
         activeBullets.push_back(bullet);
     }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        }
 }
 
 void Player::SetPosition(sf::Vector2f pos) { body_.setPosition(pos); }
