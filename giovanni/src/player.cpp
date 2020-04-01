@@ -14,6 +14,17 @@ Player::Player()
 void Player::OnDraw(sf::RenderWindow& w, float timestep)
 {
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        SetPosition({GetPosition().x + 15, GetPosition().y});
+        printf("move Right \n");
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        SetPosition({GetPosition().x - 15, GetPosition().y});
+        printf("move Left \n");
+    }
+
     for (auto& b : activeBullets)
     {
         b.OnDraw(w, timestep);
@@ -39,10 +50,6 @@ void Player::OnEvent(sf::Event e)
 
         activeBullets.push_back(bullet);
     }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        }
 }
 
 void Player::SetPosition(sf::Vector2f pos) { body_.setPosition(pos); }

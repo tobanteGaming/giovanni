@@ -1,5 +1,6 @@
 #pragma once
 
+#include "floor.hpp"
 #include "player.hpp"
 
 #include "SFML/Graphics.hpp"
@@ -9,22 +10,20 @@ namespace gio
 class Physics
 {
 public:
-    Physics(Player& p);
+    Physics(Player& p, Floor& f);
 
     void OnSetup(int width, int height);
     void OnUpdate(float timestep);
     void OnEvent(sf::Event e);
 
-    sf::RectangleShape const& GetFloor() const { return floor_; }
-
 private:
-    float acceleration {100.f};
+    float acceleration {800.f};
     float position {};
-    float mass {1.f};
     float velocity {};
 
-    Player& player_;
+    int jumpCount = 0;
 
-    sf::RectangleShape floor_ {{100.f, 100.f}};
+    Player& player_;
+    Floor& floor_;
 };
 }  // namespace gio

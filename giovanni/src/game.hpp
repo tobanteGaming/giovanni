@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bullet.hpp"
+#include "floor.hpp"
 #include "physics.hpp"
 #include "player.hpp"
 
@@ -27,7 +28,8 @@ private:
     sf::RenderWindow& window_;
 
     gio::Player player_ {};
-    gio::Physics physics_ {player_};
+    gio::Floor floor_ {};
+    gio::Physics physics_ {player_, floor_};
     sf::Clock clock_ {};
     float lastFrameTime_ {};
 };

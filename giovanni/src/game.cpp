@@ -15,7 +15,11 @@ Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w)
 
 std::string Game::GetName() const { return name_; }
 
-void Game::OnSetup() { physics_.OnSetup(window_.getSize().x, window_.getSize().y); }
+void Game::OnSetup()
+{
+    physics_.OnSetup(window_.getSize().x, window_.getSize().y);
+    window_.draw(floor_.GetShape());
+}
 
 void Game::OnFrame()
 {
@@ -34,8 +38,8 @@ void Game::OnFrame()
     fps.setPosition({500.f, 0.f});
     window_.draw(fps);
 
-    window_.draw(physics_.GetFloor());
     player_.OnDraw(window_, timestep);
+    window_.draw(floor_.GetShape());
 }
 
 void Game::OnEvent(sf::Event e)
@@ -46,5 +50,6 @@ void Game::OnEvent(sf::Event e)
         std::cout << "resized: " << e.size.width << " " << e.size.height << '\n';
     }
     player_.OnEvent(e);
+    physics_.OnEvent(e);
 }
 }  // namespace gio
