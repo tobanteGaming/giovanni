@@ -16,6 +16,20 @@ public:
 
     sf::RectangleShape& GetShape() { return floor_; }
 
+    bool IsInXRange(sf::RectangleShape const& obj) const
+    {
+
+        if (obj.getPosition().x < floor_.getPosition().x + floor_.getSize().x)
+        {
+            if (obj.getPosition().x + obj.getSize().x > floor_.getPosition().x)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 private:
     sf::RectangleShape floor_ {{100.f, 100.f}};
 };

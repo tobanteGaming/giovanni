@@ -30,7 +30,10 @@ void Player::OnDraw(sf::RenderWindow& w, float timestep)
     auto const index = std::find_if(activeBullets.begin(), activeBullets.end(),
                                     [&w](Bullet const& b) { return b.GetPosition().x > w.getSize().x; });
 
-    if (index != activeBullets.end()) { activeBullets.erase(index); }
+    if (index != activeBullets.end())
+    {
+        activeBullets.erase(index);
+    }
 
     w.draw(body_);
 }

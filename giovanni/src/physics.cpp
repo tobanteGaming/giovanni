@@ -9,6 +9,10 @@ void Physics::OnSetup(int width, int height)
     auto floor = Floor {};
     floor.SetSize(width, height);
     objects_.push_back(floor);
+
+    auto object = Floor {};
+    object.SetSize(width / 3.f, height * 0.8f);
+    objects_.push_back(object);
 }
 
 void Physics::OnUpdate(float timestep)
@@ -23,8 +27,13 @@ void Physics::OnUpdate(float timestep)
             position += timestep * (velocity + timestep * acceleration / 2);
             velocity += timestep * acceleration;
 
-            if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
-            { player_.SetStatus(Player::Status::Standing); }
+            if (o.IsInXRange(player_.GetShape()))
+            {
+                if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
+                {
+                    player_.SetStatus(Player::Status::Standing);
+                }
+            }
 
             printf("Vel: %f \n", velocity);
             printf("Acc: %f \n \n", acceleration);
@@ -50,7 +59,10 @@ void Physics::OnUpdate(float timestep)
             return !(b.GetPosition().y >= f.GetShape().getSize().y);
         });
 
-        if (index != bullets.end()) { bullets.erase(index); }
+        if (index != bullets.end())
+        {
+            bullets.erase(index);
+        }
     }
 }
 void Physics::OnEvent(sf::Event e)

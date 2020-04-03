@@ -21,8 +21,6 @@ private:
     float position {};
     float velocity {};
 
-    int jumpCount = 0;
-
     Player& player_;
 
     std::vector<Floor>& objects_;
