@@ -39,7 +39,11 @@ void Game::OnFrame()
     window_.draw(fps);
 
     player_.OnDraw(window_, timestep);
-    window_.draw(floor_.GetShape());
+
+    for (auto& o : objects_)
+    {
+        window_.draw(o.GetShape());
+    }
 }
 
 void Game::OnEvent(sf::Event e)

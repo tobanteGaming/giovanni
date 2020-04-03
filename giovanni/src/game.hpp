@@ -28,8 +28,9 @@ private:
     sf::RenderWindow& window_;
 
     gio::Player player_ {};
-    gio::Floor floor_ {};
-    gio::Physics physics_ {player_, floor_};
+    std::vector<Floor> objects_ {};
+    gio::Physics physics_ {player_, objects_};
+
     sf::Clock clock_ {};
     float lastFrameTime_ {};
 };

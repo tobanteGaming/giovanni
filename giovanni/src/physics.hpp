@@ -10,7 +10,7 @@ namespace gio
 class Physics
 {
 public:
-    Physics(Player& p, Floor& f);
+    Physics(Player& p, std::vector<Floor>& o);
 
     void OnSetup(int width, int height);
     void OnUpdate(float timestep);
@@ -24,6 +24,7 @@ private:
     int jumpCount = 0;
 
     Player& player_;
-    Floor& floor_;
+
+    std::vector<Floor>& objects_;
 };
 }  // namespace gio
