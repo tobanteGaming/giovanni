@@ -24,9 +24,7 @@ void Physics::OnUpdate(float timestep)
             velocity += timestep * acceleration;
 
             if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
-            {
-                player_.SetStatus(Player::Status::Standing);
-            }
+            { player_.SetStatus(Player::Status::Standing); }
 
             printf("Vel: %f \n", velocity);
             printf("Acc: %f \n \n", acceleration);
@@ -52,10 +50,7 @@ void Physics::OnUpdate(float timestep)
             return !(b.GetPosition().y >= f.GetShape().getSize().y);
         });
 
-        if (index != bullets.end())
-        {
-            bullets.erase(index);
-        }
+        if (index != bullets.end()) { bullets.erase(index); }
     }
 }
 void Physics::OnEvent(sf::Event e)

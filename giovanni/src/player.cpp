@@ -25,18 +25,12 @@ void Player::OnDraw(sf::RenderWindow& w, float timestep)
         printf("move Left \n");
     }
 
-    for (auto& b : activeBullets)
-    {
-        b.OnDraw(w, timestep);
-    }
+    for (auto& b : activeBullets) { b.OnDraw(w, timestep); }
 
     auto const index = std::find_if(activeBullets.begin(), activeBullets.end(),
                                     [&w](Bullet const& b) { return b.GetPosition().x > w.getSize().x; });
 
-    if (index != activeBullets.end())
-    {
-        activeBullets.erase(index);
-    }
+    if (index != activeBullets.end()) { activeBullets.erase(index); }
 
     w.draw(body_);
 }
@@ -49,6 +43,17 @@ void Player::OnEvent(sf::Event e)
         printf("geschossen\n");
 
         activeBullets.push_back(bullet);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        lookRight = false;
+        body_.setFillColor({255, 0, 0});
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        lookRight = true;
+        body_.setFillColor({0, 0, 255});
     }
 }
 

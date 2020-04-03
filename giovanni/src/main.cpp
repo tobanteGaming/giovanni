@@ -11,10 +11,7 @@ int main()
     while (window.isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            game.OnEvent(event);
-        }
+        while (window.pollEvent(event)) { game.OnEvent(event); }
         window.clear({25, 25, 25});
         game.OnFrame();
         window.display();

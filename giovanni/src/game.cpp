@@ -5,10 +5,7 @@ namespace gio
 {
 Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w)
 {
-    if (!font_.loadFromFile("assets/kremlin.ttf"))
-    {
-        std::cout << "error loading font\n";
-    }
+    if (!font_.loadFromFile("assets/kremlin.ttf")) { std::cout << "error loading font\n"; }
 
     // window_.setFramerateLimit(30);
     window_.setVerticalSyncEnabled(true);
@@ -37,19 +34,13 @@ void Game::OnFrame()
 
     player_.OnDraw(window_, timestep);
 
-    for (auto& o : objects_)
-    {
-        window_.draw(o.GetShape());
-    }
+    for (auto& o : objects_) { window_.draw(o.GetShape()); }
 }
 
 void Game::OnEvent(sf::Event e)
 {
     if (e.type == sf::Event::Closed) window_.close();
-    if (e.type == sf::Event::Resized)
-    {
-        std::cout << "resized: " << e.size.width << " " << e.size.height << '\n';
-    }
+    if (e.type == sf::Event::Resized) { std::cout << "resized: " << e.size.width << " " << e.size.height << '\n'; }
     player_.OnEvent(e);
     physics_.OnEvent(e);
 }

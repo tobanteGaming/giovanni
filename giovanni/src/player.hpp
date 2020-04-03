@@ -32,6 +32,8 @@ private:
     sf::RectangleShape body_ {};
     std::vector<Bullet> activeBullets {};
     Status status {Status::Falling};
+
+    bool lookRight = true;
 };
 
 }  // namespace gio
