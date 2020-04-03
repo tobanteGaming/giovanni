@@ -10,16 +10,13 @@ Game::Game(std::string n, sf::RenderWindow& w) : name_(n), window_(w)
         std::cout << "error loading font\n";
     }
 
-    window_.setFramerateLimit(30);
+    // window_.setFramerateLimit(30);
+    window_.setVerticalSyncEnabled(true);
 }
 
 std::string Game::GetName() const { return name_; }
 
-void Game::OnSetup()
-{
-    physics_.OnSetup(window_.getSize().x, window_.getSize().y);
-    window_.draw(floor_.GetShape());
-}
+void Game::OnSetup() { physics_.OnSetup(window_.getSize().x, window_.getSize().y); }
 
 void Game::OnFrame()
 {

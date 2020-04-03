@@ -18,31 +18,25 @@ void Physics::OnUpdate(float timestep)
     for (auto& o : objects_)
     {
 
-        if ((player_.GetPosition().y + 100 < o.GetShape().getPosition().y) && (jumpCount == 0))
+        if (player_.GetStatus() == Player::Status::Jumping || player_.GetStatus() == Player::Status::Falling)
         {
             position += timestep * (velocity + timestep * acceleration / 2);
             velocity += timestep * acceleration;
 
+            if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
+            {
+                player_.SetStatus(Player::Status::Standing);
+            }
+
             printf("Vel: %f \n", velocity);
             printf("Acc: %f \n \n", acceleration);
         }
-        else if (jumpCount == 0)
+        else
         {
             position = o.GetShape().getPosition().y - 100;
+            velocity = 0.f;
+            player_.SetStatus(Player::Status::Standing);
         }
-    }
-
-    // Jump
-
-    if (jumpCount > 0)
-    {
-        position -= timestep * (velocity + timestep * acceleration / 2);
-        velocity -= timestep * acceleration * 20.f;
-
-        printf("Vel: %f \n", velocity);
-        printf("Acc: %f \n \n", acceleration);
-
-        jumpCount--;
     }
 
     player_.SetPosition({player_.GetPosition().x, position});
@@ -68,15 +62,12 @@ void Physics::OnEvent(sf::Event e)
 {
 
     // Jump
-    for (auto& o : objects_)
+
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) && (velocity == 0.f))
     {
-        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-            && (player_.GetPosition().y + 100 == o.GetShape().getPosition().y))
-        {
-            printf("Sprung\n");
-            jumpCount = 10;
-            velocity  = 2000.f;
-        }
+        printf("Sprung\n");
+        velocity = -1000.f;
+        player_.SetStatus(Player::Status::Jumping);
     }
 }
 

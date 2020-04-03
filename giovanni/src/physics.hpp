@@ -17,7 +17,7 @@ public:
     void OnEvent(sf::Event e);
 
 private:
-    float acceleration {800.f};
+    float acceleration {3000.f};
     float position {};
     float velocity {};
 
