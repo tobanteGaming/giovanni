@@ -38,7 +38,7 @@ void Player::OnEvent(sf::Event e)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
-        auto bullet = Bullet();
+        auto bullet = Bullet(lookRight);
         bullet.SetPosition(GetPosition());
         printf("geschossen\n");
 

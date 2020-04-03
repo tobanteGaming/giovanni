@@ -9,7 +9,7 @@ namespace gio
 class Bullet
 {
 public:
-    Bullet();
+    Bullet(bool right);
     void OnDraw(sf::RenderWindow& w, float timestep);
     void OnEvent(sf::Event e);
 
@@ -21,8 +21,9 @@ private:
 
     float acceleration {50.f};
     float position {};
-    float mass {2.f};
     float velocity {};
+
+    bool right_ = true;
 };
 
 }  // namespace gio

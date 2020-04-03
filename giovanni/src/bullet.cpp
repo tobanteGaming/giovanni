@@ -3,11 +3,13 @@
 
 namespace gio
 {
-Bullet::Bullet()
+Bullet::Bullet(bool right) : right_(right)
 {
+
     body_.setSize({10.f, 10.f});
     body_.setFillColor({255, 0, 0});
 }
+
 void Bullet::OnDraw(sf::RenderWindow& w, float timestep)
 {
     auto xPos = body_.getPosition().x;
@@ -16,7 +18,9 @@ void Bullet::OnDraw(sf::RenderWindow& w, float timestep)
     position += timestep * (velocity + timestep * acceleration / 2);
     velocity += timestep * acceleration;
 
-    body_.setPosition({xPos += 1000.f * timestep, yPos + position});
+    auto const x = (right_ ? 1000.f : -1000.f) * timestep;
+
+    body_.setPosition({xPos += x, yPos + position});
 
     w.draw(body_);
 }
