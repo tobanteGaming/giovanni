@@ -37,6 +37,7 @@ target_link_libraries(giovanni-desktop PRIVATE Gio::Giovanni)
 set (giovanni_test_src
     src/main_test.cpp
     src/game_test.cpp
+    src/floor_test.cpp
 )
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${giovanni_test_src})
 add_executable(giovanni_tests ${giovanni_test_src})

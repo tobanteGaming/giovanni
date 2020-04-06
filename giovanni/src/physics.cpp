@@ -26,6 +26,8 @@ void Physics::OnUpdate(float timestep)
         {
             position += timestep * (velocity + timestep * acceleration / 2);
             velocity += timestep * acceleration;
+            
+            player_.SetStatus(Player::Status::Falling);
 
             if (o.IsInXRange(player_.GetShape()))
             {
@@ -34,9 +36,6 @@ void Physics::OnUpdate(float timestep)
                     player_.SetStatus(Player::Status::Standing);
                 }
             }
-
-            printf("Vel: %f \n", velocity);
-            printf("Acc: %f \n \n", acceleration);
         }
         else
         {
