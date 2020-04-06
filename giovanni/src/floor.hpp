@@ -15,8 +15,8 @@ public:
     }
 
     sf::RectangleShape& GetShape() { return floor_; }
-    void SetName(std::string n){name = n;}
-    std::string GetName() const {return name;}
+    void SetName(std::string n) { name = n; }
+    std::string GetName() const { return name; }
 
     bool IsInXRange(sf::RectangleShape const& obj) const
     {
@@ -34,7 +34,7 @@ public:
 
 private:
     sf::RectangleShape floor_ {{100.f, 100.f}};
-    std::string name{};
+    std::string name {};
 };
 
 }  // namespace gio

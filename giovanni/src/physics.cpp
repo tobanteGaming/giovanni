@@ -21,10 +21,11 @@ void Physics::OnSetup(int width, int height)
 void Physics::OnUpdate(float timestep)
 {
 
-    //Sort floor vector
-    
-    std::sort(objects_.begin(), objects_.end(), [](Floor& lhs, Floor& rhs){return lhs.GetShape().getPosition().y < rhs.GetShape().getPosition().y;});
-    
+    // Sort floor vector
+
+    std::sort(objects_.begin(), objects_.end(),
+              [](Floor& lhs, Floor& rhs) { return lhs.GetShape().getPosition().y < rhs.GetShape().getPosition().y; });
+
     // Gravity
     for (auto& o : objects_)
     {
@@ -33,10 +34,11 @@ void Physics::OnUpdate(float timestep)
         {
             position += timestep * (velocity + timestep * acceleration / 2);
             velocity += timestep * acceleration;
-            
-            player_.SetStatus(Player::Status::Falling);x
 
-            if (o.IsInXRange(player_.GetShape()))
+            player_.SetStatus(Player::Status::Falling);
+            x
+
+                if (o.IsInXRange(player_.GetShape()))
             {
                 if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
                 {
