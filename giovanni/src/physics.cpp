@@ -1,4 +1,5 @@
 #include "physics.hpp"
+#include <algorithm>
 
 namespace gio
 {
@@ -8,16 +9,22 @@ void Physics::OnSetup(int width, int height)
 {
     auto floor = Floor {};
     floor.SetSize(width, height);
+    floor.SetName("main");
     objects_.push_back(floor);
 
     auto object = Floor {};
     object.SetSize(width / 3.f, height * 0.8f);
+    object.SetName("high");
     objects_.push_back(object);
 }
 
 void Physics::OnUpdate(float timestep)
 {
 
+    //Sort floor vector
+    
+    std::sort(objects_.begin(), objects_.end(), [](Floor& lhs, Floor& rhs){return lhs.GetShape().getPosition().y < rhs.GetShape().getPosition().y;});
+    
     // Gravity
     for (auto& o : objects_)
     {
@@ -27,13 +34,15 @@ void Physics::OnUpdate(float timestep)
             position += timestep * (velocity + timestep * acceleration / 2);
             velocity += timestep * acceleration;
             
-            player_.SetStatus(Player::Status::Falling);
+            player_.SetStatus(Player::Status::Falling);x
 
             if (o.IsInXRange(player_.GetShape()))
             {
                 if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
                 {
                     player_.SetStatus(Player::Status::Standing);
+                    std::printf("Collision %s\n", o.GetName().c_str());
+                    break;
                 }
             }
         }
@@ -42,6 +51,7 @@ void Physics::OnUpdate(float timestep)
             position = o.GetShape().getPosition().y - 100;
             velocity = 0.f;
             player_.SetStatus(Player::Status::Standing);
+            break;
         }
     }
 
