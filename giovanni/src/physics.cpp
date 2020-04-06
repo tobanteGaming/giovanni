@@ -14,48 +14,51 @@ void Physics::OnSetup(int width, int height)
 
     auto object = Floor {};
     object.SetSize(width / 3.f, height * 0.8f);
+    object.GetShape().setPosition(300, height * 0.8f);
     object.SetName("high");
     objects_.push_back(object);
 }
 
 void Physics::OnUpdate(float timestep)
 {
-
+    assert(objects_.size() == 2 && "da sind zu viele objects");
     // Sort floor vector
 
     std::sort(objects_.begin(), objects_.end(),
               [](Floor& lhs, Floor& rhs) { return lhs.GetShape().getPosition().y < rhs.GetShape().getPosition().y; });
 
+    position += timestep * (velocity + timestep * acceleration / 2);
+    velocity += timestep * acceleration;
+
     // Gravity
-    for (auto& o : objects_)
-    {
-
-        if (player_.GetStatus() == Player::Status::Jumping || player_.GetStatus() == Player::Status::Falling)
+    auto collisions = [&]() -> void {
+        
+        for (auto& o : objects_)
         {
-            position += timestep * (velocity + timestep * acceleration / 2);
-            velocity += timestep * acceleration;
-
-            player_.SetStatus(Player::Status::Falling);
-            x
-
-                if (o.IsInXRange(player_.GetShape()))
+            if (player_.GetStatus() == Player::Status::Jumping || player_.GetStatus() == Player::Status::Falling)
             {
-                if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
+                if (o.IsInXRange(player_.GetShape()))
                 {
-                    player_.SetStatus(Player::Status::Standing);
-                    std::printf("Collision %s\n", o.GetName().c_str());
-                    break;
+                    if (player_.GetPosition().y + 100 > o.GetShape().getPosition().y)
+                    {
+                        player_.SetStatus(Player::Status::Standing);
+                        position = o.GetShape().getPosition().y-100;
+                        std::printf("Collision %s\n", o.GetName().c_str());
+                        return;
+                    }
                 }
             }
+            else
+            {
+                position = o.GetShape().getPosition().y - 100;
+                velocity = 0.f;
+                player_.SetStatus(Player::Status::Standing);
+                return;
+            }
         }
-        else
-        {
-            position = o.GetShape().getPosition().y - 100;
-            velocity = 0.f;
-            player_.SetStatus(Player::Status::Standing);
-            break;
-        }
-    }
+    };
+
+    collisions();
 
     player_.SetPosition({player_.GetPosition().x, position});
 
@@ -65,7 +68,6 @@ void Physics::OnUpdate(float timestep)
 
     for (auto& o : objects_)
     {
-
         auto const index = std::find_if(bullets.begin(), bullets.end(), [f = o](Bullet const& b) mutable {
             return !(b.GetPosition().y >= f.GetShape().getSize().y);
         });
